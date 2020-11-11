@@ -1,4 +1,4 @@
-package com.example.android_example
+package com.example.android_example.ui.details
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
+import com.example.android_example.DetailsFragmentArgs
+import com.example.android_example.R
 import kotlinx.android.synthetic.main.details_fragment.*
 
 class DetailsFragment : Fragment() {

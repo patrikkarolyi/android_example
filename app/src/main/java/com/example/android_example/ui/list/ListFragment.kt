@@ -1,4 +1,4 @@
-package com.example.android_example
+package com.example.android_example.ui.list
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.example.android_example.ListFragmentDirections
+import com.example.android_example.R
 import kotlinx.android.synthetic.main.list_fragment.*
 
 class ListFragment : Fragment() {
