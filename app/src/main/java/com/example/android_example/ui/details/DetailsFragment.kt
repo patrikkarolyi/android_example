@@ -1,13 +1,12 @@
 package com.example.android_example.ui.details
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
-import com.example.android_example.DetailsFragmentArgs
 import com.example.android_example.R
 import kotlinx.android.synthetic.main.details_fragment.*
 
@@ -27,11 +26,11 @@ class DetailsFragment : Fragment() {
         return inflater.inflate(R.layout.details_fragment, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(DetailsViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this).get(DetailsViewModel::class.java)
 
+        //getMovie with given id
         textview.text = args.movieId.toString()
 
     }
