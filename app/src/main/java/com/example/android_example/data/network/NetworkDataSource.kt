@@ -1,8 +1,9 @@
 package com.example.android_example.data.network
 
-import com.example.android_example.data.network.model.NetworkResponse
+import com.example.android_example.data.network.model.NetworkMovie
+import javax.inject.Inject
 
-class NetworkDataSource(
+class NetworkDataSource @Inject constructor(
     private val moviesAPI : MoviesAPI
 ){
 
@@ -20,12 +21,12 @@ class NetworkDataSource(
         val image_url_large= "https://image.tmdb.org/t/p/original/"
     }
 
-    suspend fun getMovies(): NetworkResponse? {
+    suspend fun getMovies(): List<NetworkMovie> {
         return moviesAPI.getMovies(
             API_KEY,
             language,
             page
-        )
+        ).results
     }
 
 

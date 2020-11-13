@@ -7,15 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.example.android_example.R
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.list_fragment.*
 
+@AndroidEntryPoint
 class ListFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = ListFragment()
-    }
 
     private lateinit var viewModel: ListViewModel
 
@@ -36,10 +33,8 @@ class ListFragment : Fragment() {
         viewModel.sec.observe(viewLifecycleOwner, Observer { newSec ->
             button.text = newSec.toString()
         })
+        viewModel.getAllMovies()
 
-        button.setOnClickListener {
-            viewModel.getAllMovies()
-        }
     }
 
 }

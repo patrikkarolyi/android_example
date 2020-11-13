@@ -1,29 +1,32 @@
 package com.example.android_example.ui.list
 
 import android.util.Log
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.android_example.data.interactors.MovieInteractor
+import com.example.android_example.data.network.model.NetworkMovie
 import kotlinx.coroutines.*
 
-class ListViewModel : ViewModel() {
+class ListViewModel @ViewModelInject constructor(
+    private val movieInteractor: MovieInteractor
+) : ViewModel() {
 
     private val scope: CoroutineScope = CoroutineScope(Dispatchers.Main)
     private var job: Job? = null
-    val sec = MutableLiveData<Int>()
+    val movies = MutableLiveData<List<NetworkMovie>>()
 
-    fun getAllMovies(){
+    fun getAllMovies() {
         job?.cancel()
         job = scope.launch {
-            for(i in 1..100){
-                sec.value = i
-                delay(1000)
-            }
+            movies.value = movieInteractor.getMovies()
         }
     }
 
     init {
         Log.i("ViewModel", "ListViewModel created!")
     }
+
     override fun onCleared() {
         super.onCleared()
         Log.i("ViewModel", "ListViewModel destroyed!")
