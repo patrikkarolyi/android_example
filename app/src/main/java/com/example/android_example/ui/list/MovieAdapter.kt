@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.android_example.R
@@ -12,9 +13,7 @@ import com.example.android_example.data.network.NetworkDataSource
 import com.example.android_example.data.network.model.NetworkMovie
 import kotlinx.android.synthetic.main.movie_item.view.*
 
-class MovieAdapter(val movies: List<NetworkMovie>, val listener : Listener? = null) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
-
-
+class MovieAdapter(val listener : Listener? = null) : ListAdapter<NetworkMovie,MovieAdapter.ViewHolder>(MovieDiffUtil()) {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val titleText: TextView = itemView.titleText
@@ -36,7 +35,7 @@ class MovieAdapter(val movies: List<NetworkMovie>, val listener : Listener? = nu
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = movies[position]
+        val item = getItem(position)
         holder.titleText.text = item.title
         holder.ratingText.text = item.vote_average.toString()
         holder.movieId = item.id
@@ -45,10 +44,6 @@ class MovieAdapter(val movies: List<NetworkMovie>, val listener : Listener? = nu
             .load(NetworkDataSource.image_url_small + item.poster_path)
             .placeholder(R.drawable.ic_launcher_background)
             .into(holder.posterImage)
-    }
-
-    override fun getItemCount(): Int {
-        return movies.size
     }
 
     interface Listener{
